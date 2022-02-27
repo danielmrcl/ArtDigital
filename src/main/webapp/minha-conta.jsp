@@ -21,6 +21,7 @@ function botaoDeletarUsuario() {
 	
 	<main class="flex-shrink-0">
 	<div class="container p-5">
+		<%@include file='elementos/message-handler.jsp'%>
 		<%
 		Object usuarioValidado = session.getAttribute("usuarioValidado");
 	

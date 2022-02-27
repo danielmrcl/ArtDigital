@@ -24,6 +24,7 @@
 	%>
 	<main>
 		<div class="container px-5 py-1">
+		<%@include file='elementos/message-handler.jsp'%>
 		<% if (produto != null) { %>
 			<div class="d-flex flex-lg-row flex-column justify-content-center p-1" style="background-color: #C5E3FF; border-radius: 15px 15px 0px 0px">
 				<div class="m-3" style="object-fit: cover; border-radius: 15px; min-width: 30%">

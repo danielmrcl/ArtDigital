@@ -85,23 +85,13 @@
 	</script>
 
 	<div class="container px-5 py-1">
-
+		<%@include file='elementos/message-handler.jsp'%>
 		<%
 		if (session.getAttribute("usuarioValidado") != null) {
 			Usuario anunciarLogin = (Usuario) session.getAttribute("usuarioValidado");
 		%>
 		<div class="p-3 my-3 mx-auto"
 			style="background-color: #C5E3FF; border-radius: 15px; max-width: 1000px">
-			<%
-			String error = request.getParameter("error");
-			if (error != null) {
-				%>
-				<div class="alert alert-danger" role="alert">
-				  <%= error %>
-				</div>
-				<%
-			}
-			%>
 			<form id="formularioAnunciar"
 				action="ProdutoServlet" method="post" enctype="multipart/form-data"
 				class="row g-3 justify-content-center mx-auto">
