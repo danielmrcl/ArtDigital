@@ -60,11 +60,5 @@
         </div>
       </div>
     </main>
-
-    <footer class="fixed-bottom footer mt-auto py-3 bg-light" style="background-image: url('img/BARRA_BRANCA.jpg');">
-      <div class="container">
-        <span class="text-center justify-content-center">2021 ArtDigital</span>
-      </div>
-    </footer>
 </body>
 </html>
