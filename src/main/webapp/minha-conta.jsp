@@ -83,7 +83,7 @@ function botaoDeletarUsuario() {
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <form action="./processamentos/AtualizarUsuario.jsp" method="post" class="row g-3">
+		        <form action="AtualizaUsuarioServlet" method="post" class="row g-3">
 		          <label class="form-label">Informações de Usuario</label>
 		          <div class="col-md-12">
 		            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nome" value="<%=usuario.getNome()%>" required pattern=".{3,}" title="O campo NOME deve ter no mínimo 3 letras">
@@ -128,7 +128,7 @@ function botaoDeletarUsuario() {
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <p>Você quer mesmo deletar o usuario de nome <% out.print(usuario.getNome()); %>? Esta operação não pode ser desfeita.</p>
+		        <p>Você quer mesmo deletar o usuario de nome <%= usuario.getNome() %>? Esta operação não pode ser desfeita.</p>
 		        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 			        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
 			        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="botaoDeletarUsuario()" disabled>Deletar</button>
