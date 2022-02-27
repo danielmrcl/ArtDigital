@@ -25,7 +25,7 @@
 			<div class="text-center">
 	        	<p>Digite suas credenciais para entrar no sistema!</p>
 	        </div>
-	        <form action="./processamentos/ProcessarLogin.jsp" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
+	        <form action="ProcessaLoginServlet" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
 	        	<div class="col-md-12">
 	            	<input type="email"
 	            		class="form-control"
