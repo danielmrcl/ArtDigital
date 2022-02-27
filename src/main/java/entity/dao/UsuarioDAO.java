@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import entity.Usuario;
+import org.mindrot.jbcrypt.BCrypt;
 import utils.HibernateUtil;
 
 /** Classe com métodos de crud do Usuário. */
@@ -171,8 +172,8 @@ public abstract class UsuarioDAO {
 	/**
 	 * Busca um usuário salvo no banco.
 	 * 
-	 * @param nomeCampo Campo para buscar usuário.
-	 * @param valorCampo Valor do campo.
+	 * @param campo Campo para buscar usuário.
+	 * @param valor Valor do campo.
 	 * @return Usuário encontrado.
 	 */
 	private static Usuario procurarUsuarioPor(String campo, String valor) {
@@ -208,8 +209,8 @@ public abstract class UsuarioDAO {
 	 */
 	public static Usuario validarUsuarioEmailSenha(String email, String senha) {
 		var usuario = procurarUsuarioPorEmail(email);
-		
-		if (usuario != null && !usuario.getLogin().getSenha().equals(senha)) {
+
+		if (usuario != null && !BCrypt.checkpw(senha, usuario.getLogin().getSenha())) {
 			usuario = null;
 		}
 		return usuario;
