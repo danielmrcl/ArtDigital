@@ -18,25 +18,25 @@
 	<%
 	Logger logger = Logger.getLogger("ProcessarCadastro.jsp");
 
-	String nome   = (String) request.getParameter("nomeInput");
-	String email  = (String) request.getParameter("emailInput");
-	String rua    = (String) request.getParameter("ruaInput");
-	String cep    = (String) request.getParameter("cepInput");
-	String bairro = (String) request.getParameter("bairroInput");
-	String cidade = (String) request.getParameter("cidadeInput");
+	String nome   = request.getParameter("nomeInput");
+	String email  = request.getParameter("emailInput");
+	String rua    = request.getParameter("ruaInput");
+	String cep    = request.getParameter("cepInput");
+	String bairro = request.getParameter("bairroInput");
+	String cidade = request.getParameter("cidadeInput");
 	
-	// numero
-	Integer numero = 0;
-	
+	logger.info("Processando numero.");
+	int numero;
 	try {
 		numero = Integer.parseInt(request.getParameter("numeroInput"));
-	} catch (Exception e) {
+	} catch (NumberFormatException e) {
+        logger.warning("Erro ao processar numero.\nMessage: " + e.getMessage());
 		numero = 0;
 	}
 	
-	/* Processando cpf e cnpj */
-	String inputAccountType = (String) request.getParameter("tipoInput");
-	String inputCpfCnpj = (String) request.getParameter("documentoInput");
+	logger.info("Processando cpf e cnpj.");
+	String inputAccountType = request.getParameter("tipoInput");
+	String inputCpfCnpj = request.getParameter("documentoInput");
 
 	String cpf = null;
 	String cnpj = null;
@@ -47,9 +47,8 @@
 		cnpj = inputCpfCnpj;
 	}
 	
-	/* Validando usuarios duplicados */
-	boolean usuarioExiste = false; 
-	
+	logger.info("Validando usuarios duplicados.");
+	boolean usuarioExiste = false;
 	if (UsuarioDAO.procurarUsuarioPorEmail(email) != null) {
 		out.print("<script>alert('Já existe um usuário com este Email! Tente outro.');</script>");
 		usuarioExiste = true;
@@ -61,26 +60,25 @@
 		usuarioExiste = true;
 	}
 	
-	// login
+	logger.info("Criando usuario.");
 	String senha = request.getParameter("passwordInput1");
 	Login login = new Login(
 		BCrypt.hashpw(senha, BCrypt.gensalt()),
 		LocalDateTime.now()
 	);
-	
 	Usuario usuario = new Usuario(
-			nome,
-			null,
-			email,
-			login,
-			cep,
-			bairro,
-			rua,
-			numero,
-			cidade,
-			null,
-			cpf,
-			cnpj
+        nome,
+        null,
+        email,
+        login,
+        cep,
+        bairro,
+        rua,
+        numero,
+        cidade,
+        null,
+        cpf,
+        cnpj
 	);
 	
 	if (!usuarioExiste) {
