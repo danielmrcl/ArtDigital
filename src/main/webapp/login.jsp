@@ -20,7 +20,7 @@
     
     <main class="flex-shrink-0">
       <div class="container px-5 py-1">
-      
+		<%@include file='elementos/message-handler.jsp'%>
       	<div class="p-3 my-3 mx-auto" style="background-color: #C5E3FF; border-radius: 15px; max-width: 500px;">
 			<div class="text-center">
 	        	<p>Digite suas credenciais para entrar no sistema!</p>

@@ -26,6 +26,7 @@
     
     <main class="flex-shrink-0">
       <div class="container px-5 py-1">
+        <%@include file='elementos/message-handler.jsp'%>
         <div>
           <form action="index.jsp" method="get" class="d-flex">
             <input id="buscar" name="buscar" class="form-control me-2" style="border-radius: 0px; background-color: #c2c2c2" type="search" placeholder="Pesquisar" aria-label="Search">

@@ -66,6 +66,7 @@
     
     <main>
       <div class="container px-5 py-1">
+	  	<%@include file='elementos/message-handler.jsp'%>
       	<div class="p-3 my-3 mx-auto" 
 	      	style="background-color: #C5E3FF; 
 	      	border-radius: 15px; 
