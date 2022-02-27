@@ -74,7 +74,7 @@
 	          <p>Digite abaixo os dados para cadastrado no sistema!</p>
 	        </div>
 	        <form id="formularioCadastro" 
-	        	action="./processamentos/ProcessarCadastro.jsp" 
+	        	action="UsuarioCadastroServlet"
 	        	method="post" 
 	        	class="row g-3 justify-content-center mx-auto">
 	          <label class="form-label">Informações de Usuario</label>
