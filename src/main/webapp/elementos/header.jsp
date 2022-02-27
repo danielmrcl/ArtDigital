@@ -57,7 +57,7 @@
 						</a> 
 						<a class="btn btn-primary mx-2 border-0"
 							style="background-color: #8dcaff; color: black"
-							href="./processamentos/RealizarLogout.jsp" role="button"
+							href="LogoutServlet" role="button"
 							id="headerButtonLogin">Sair</a>
 						<%
 						} else {
