@@ -4,6 +4,8 @@
 <%@page import="entity.dao.UsuarioDAO"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="entity.Usuario"%>
+<%@ page import="org.mindrot.jbcrypt.BCrypt" %>
+<%@ page import="java.util.logging.Logger" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -14,6 +16,8 @@
 </head>
 <body>
 	<%
+	Logger logger = Logger.getLogger("ProcessarCadastro.jsp");
+
 	String nome   = (String) request.getParameter("nomeInput");
 	String email  = (String) request.getParameter("emailInput");
 	String rua    = (String) request.getParameter("ruaInput");
@@ -58,8 +62,11 @@
 	}
 	
 	// login
-	String senha = (String) request.getParameter("passwordInput1");
-	Login login = new Login(senha, LocalDateTime.now());
+	String senha = request.getParameter("passwordInput1");
+	Login login = new Login(
+		BCrypt.hashpw(senha, BCrypt.gensalt()),
+		LocalDateTime.now()
+	);
 	
 	Usuario usuario = new Usuario(
 			nome,
