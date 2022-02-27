@@ -12,7 +12,7 @@
 <title>Tela do Usuario | ArtDigital</title>
 <script>
 function botaoDeletarUsuario() {
-	window.location = "./processamentos/DeletarUsuario.jsp";
+	document.getElementById("deleteForm").requestSubmit();
 }
 </script>
 </head>
@@ -131,7 +131,7 @@ function botaoDeletarUsuario() {
 		        <p>Você quer mesmo deletar o usuario de nome <%= usuario.getNome() %>? Esta operação não pode ser desfeita.</p>
 		        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 			        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-			        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="botaoDeletarUsuario()" disabled>Deletar</button>
+			        <a class="btn btn-danger" role="button" id="deleteButton" href="DeletaUsuarioServlet">Deletar</a>
 		        </div>
 		      </div>
 		    </div>
