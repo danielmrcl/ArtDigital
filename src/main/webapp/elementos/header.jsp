@@ -5,7 +5,7 @@
 <body style="background-color: #F0F8FF">
 	<header
 		class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 border-bottom"
-		style="background-color: #EEDD82; background-image: url('img/BARRA3.jpg');">
+		style="background-color: #EEDD82;">
 		
 		<div class="container">
 			<div class="row">
