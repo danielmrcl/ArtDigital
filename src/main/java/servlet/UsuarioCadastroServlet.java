@@ -64,22 +64,11 @@ public class UsuarioCadastroServlet extends HttpServlet {
             logger.info("Criando usuario.");
             String senha = request.getParameter("passwordInput1");
             Login login = new Login(
-                    BCrypt.hashpw(senha, BCrypt.gensalt()),
-                    LocalDateTime.now()
+                null, BCrypt.hashpw(senha, BCrypt.gensalt()), LocalDateTime.now()
             );
             Usuario usuario = new Usuario(
-                    nome,
-                    null,
-                    email,
-                    login,
-                    cep,
-                    bairro,
-                    rua,
-                    numero,
-                    cidade,
-                    null,
-                    cpf,
-                    cnpj
+                null, nome, null, email, login, cep,
+                bairro, rua, numero, cidade, null, cpf, cnpj
             );
 
             if (!UsuarioDAO.criarUsuario(usuario)) {
