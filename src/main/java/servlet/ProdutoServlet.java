@@ -27,10 +27,10 @@ public class ProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = (String) request.getParameter("nomeInput");
-		String descricao = (String) request.getParameter("descInput");
+		String nome = request.getParameter("nomeInput");
+		String descricao = request.getParameter("descInput");
 		
-		String categoriaId = (String) request.getParameter("selectInput");
+		String categoriaId = request.getParameter("selectInput");
 		Categoria categoria = CategoriaDAO.procurarCategoria(Long.parseLong(categoriaId));
 		
 		Integer quantidade = null;
@@ -47,15 +47,16 @@ public class ProdutoServlet extends HttpServlet {
 		imagemInputPart.write(file.getPath());
 		
 		Imagem imagem = new Imagem(
-			imagemInputPart.getSubmittedFileName(), 
-			imagemInputPart.getContentType(), 
-			Files.readAllBytes(file.toPath())
+        null, imagemInputPart.getSubmittedFileName(),
+        imagemInputPart.getContentType(), Files.readAllBytes(file.toPath())
 		);
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuarioValidado");
 		
-		Produto produto = new Produto(descricao, nome, quantidade, preco, categoria, imagem, usuario);
+		Produto produto = new Produto(
+        null, descricao, nome, quantidade, preco, imagem, categoria, usuario
+    );
 		System.out.println(produto);
 		
 		boolean success;
