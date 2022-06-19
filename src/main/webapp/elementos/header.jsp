@@ -49,7 +49,10 @@
 						<%
 						if (session.getAttribute("usuarioValidado") != null) {
 							Usuario headerLogin = (Usuario) session.getAttribute("usuarioValidado");
+							String avatar = (String) session.getAttribute("avatar-base64");
 						%>
+						<img src="data:image/png;base64,<%= avatar %>"
+								style="object-fit: cover; border-radius: 50%;" height=50 alt="Avatar do usuário">
 						<a class="btn btn-secundary mx-2" style="border-radius: 0px"
 							href="./minha-conta.jsp" role="button" id="headerButtonLogin"><%=headerLogin.getNome()%></a>
 						<a href="./carrinho.jsp" class="my-2"> <img

@@ -63,6 +63,16 @@
       <version>1.18.24</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>5.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>4.10.0</version>
+    </dependency>
   </dependencies>
 
   <build>
