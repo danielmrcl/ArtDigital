@@ -21,23 +21,14 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-            	URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
-                String username = dbUri.getUserInfo().split(":")[0];
-                String password = dbUri.getUserInfo().split(":")[1];
-                String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
-                
                 var configuration = new Configuration();
                 
                 var settings = new Properties();
-                settings.put(Environment.DRIVER, "org.postgresql.Driver");
-                settings.put(Environment.URL, dbUrl);
-                settings.put(Environment.USER, username);
-                settings.put(Environment.PASS, password);
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
-                settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, true);
+                settings.put(Environment.DRIVER, System.getenv("DATABASE_DRIVER"));
+                settings.put(Environment.URL, System.getenv("DATABASE_URL"));
+                settings.put(Environment.USER, System.getenv("DATABASE_USER"));
+                settings.put(Environment.PASS, System.getenv("DATABASE_PASS"));
+                settings.put(Environment.DIALECT, System.getenv("DATABASE_DIALECT"));
                 settings.put(Environment.HBM2DDL_AUTO, "update");
                 
                 configuration.setProperties(settings);
