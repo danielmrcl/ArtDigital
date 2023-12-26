@@ -4,6 +4,7 @@ services:
     ports:
       - "8080:8080"
     environment:
+      APPLICATION_ROOT: "/usr/local/tomcat/webapps/ROOT/"
       DATABASE_DRIVER: "org.h2.Driver"
       DATABASE_URL: "jdbc:h2:mem:artdigitaldb"
       DATABASE_USER: "sa"

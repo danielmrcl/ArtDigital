@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.logging.Logger;
 
@@ -34,12 +36,20 @@ public class ProcessaLoginServlet extends HttpServlet {
 		        var message = "Credenciais incorretas ou inexistentes no banco de dados";
                 throw new Exception(message);
             }
-            var imageBytes = profilePictureService.getImageBytes(StringUtil.md5(usuario.getEmail()));
+
+			byte[] imageBytes;
+			try {
+				imageBytes = profilePictureService.getImageBytes(StringUtil.md5(usuario.getEmail()));
+			} catch(Exception e) {
+				System.err.println(e.getMessage());
+				var file = new File(System.getenv("APPLICATION_ROOT") + "img/profile_default.jpg");
+				imageBytes = Files.readAllBytes(file.toPath());
+			}
 
             HttpSession session = request.getSession();
-            session.setAttribute("usuarioValidado", usuario);
+            session.setAttribute("usuarioToken", JWTUtil.generate(new UsuarioTokenDTO(usuario)));
             session.setAttribute("avatar-base64", Base64.getEncoder().encodeToString(imageBytes));
-            response.sendRedirect("minha-conta.jsp");
+            response.sendRedirect("index.jsp");
         } catch (Exception e) {
             logger.warning(e.getMessage());
             response.sendRedirect(request.getHeader("Referer") + "?error=" + e.getMessage());
