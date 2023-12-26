@@ -33,7 +33,11 @@ public class ProdutoServlet extends HttpServlet {
 		String descricao = request.getParameter("descInput");
 		
 		String categoriaId = request.getParameter("selectInput");
-		Categoria categoria = CategoriaDAO.procurarCategoria(Long.parseLong(categoriaId));
+
+		Categoria categoria = null;
+		if (categoriaId != null) {
+			CategoriaDAO.procurarCategoria(Long.parseLong(categoriaId));
+		}
 		
 		Integer quantidade = null;
 		Double preco = null;

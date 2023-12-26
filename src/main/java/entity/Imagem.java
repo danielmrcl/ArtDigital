@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +31,7 @@ public class Imagem {
 	@Column(name = "tipo")
 	private String tipo;
 
+	@Lob
 	@Column(name = "bytes")
 	private byte[] bytes;
 }

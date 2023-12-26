@@ -43,7 +43,7 @@ public class Produto {
 	private Imagem imagem;
 
 	@ManyToOne
-	@JoinColumn(name = "cod_categ", nullable = false)
+	@JoinColumn(name = "cod_categ", nullable = true)
 	private Categoria categoria;
 
 	@ManyToOne
