@@ -30,7 +30,7 @@ Requisitos:
 
 Seguindo este guia o projeto utilizara o banco de dados padrão H2 em memória. Caso queira utilizar outro banco deve ser alterado as variáveis de ambiente no arquivo `compose.yaml`.
 
-1. Criar pacote do projeto em `target/ArtDigital.war`
+1. Criar pacote do projeto em `target/ROOT.war`
 ```bash
 mvn package
 ```
