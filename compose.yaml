@@ -9,3 +9,4 @@ services:
       DATABASE_USER: "sa"
       DATABASE_PASS: ""
       DATABASE_DIALECT: "org.hibernate.dialect.H2Dialect"
+      JWT_SECRET: "ec784fa5-3825-4f41-a147-c3e7ae111d17"

@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="entity.Categoria"%>
 <%@page import="entity.dao.CategoriaDAO"%>
+<%@page import="entity.dao.UsuarioDAO"%>
 <%@page import="entity.Usuario"%>
 <!DOCTYPE html>
 <html>
@@ -87,8 +88,9 @@
 	<div class="container px-5 py-1">
 		<%@include file='elementos/message-handler.jsp'%>
 		<%
-		if (session.getAttribute("usuarioValidado") != null) {
-			Usuario anunciarLogin = (Usuario) session.getAttribute("usuarioValidado");
+		String jwtToken = (String) session.getAttribute("usuarioToken");
+		if (jwtToken != null) {
+			Usuario anunciarLogin = UsuarioDAO.procurarUsuarioPorEmail(JWTUtil.verify(jwtToken).getEmail());
 		%>
 		<div class="p-3 my-3 mx-auto"
 			style="background-color: #C5E3FF; border-radius: 15px; max-width: 1000px">

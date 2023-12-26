@@ -1,9 +1,11 @@
 package servlet;
 
 import entity.dao.UsuarioDAO;
+import entity.dto.UsuarioTokenDTO;
 import config.GuiceInjector;
 import service.IProfilePictureService;
 import utils.StringUtil;
+import utils.JWTUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
