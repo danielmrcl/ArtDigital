@@ -2,6 +2,7 @@ package servlet;
 
 import entity.Usuario;
 import entity.dao.UsuarioDAO;
+import utils.JWTUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +32,10 @@ public class AtualizaUsuarioServlet extends HttpServlet {
             }
 
             HttpSession session = request.getSession();
-            Object usuarioValidado = session.getAttribute("usuarioValidado");
+            var jwtToken = (String) session.getAttribute("usuarioToken");
 
-            if (usuarioValidado != null) {
-                Usuario usuario = (Usuario) usuarioValidado;
+            if (jwtToken != null) {
+				Usuario usuario = UsuarioDAO.procurarUsuarioPorEmail(JWTUtil.verify(jwtToken).getEmail());
 
                 usuario.setNome(nome);
                 usuario.setRua(rua);

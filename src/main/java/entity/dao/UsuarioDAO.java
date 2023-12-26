@@ -95,18 +95,28 @@ public abstract class UsuarioDAO {
 	/**
 	 * Deleta um usuário salvo no banco.
 	 * 
-	 * @param id Identificador do usuario.
+	 * @param email Email do usuario.
 	 * @return deletado com sucesso (true) ou falha (false).
 	 */
-	public static boolean deletarUsuario(Long id) {
+	public static boolean deletarUsuario(String email) {
 		var success = false;
 		var session = sessionFactory.openSession();
 		var transaction = session.beginTransaction();
 		try {
-			var usuario = (Usuario) session.get(Usuario.class, id);
-			session.delete(usuario);
-			transaction.commit();
-			success = true;
+			var builder = session.getCriteriaBuilder();
+			var query = builder.createCriteriaDelete(Usuario.class);
+			var from = query.from(Usuario.class);
+			query.where(builder.equal(from.get("email"), email));
+
+			int rowsDeleted = session.createQuery(query).executeUpdate();
+
+			success = rowsDeleted == 1;
+
+			if (success) {
+				transaction.commit();
+			} else {
+				transaction.rollback();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();

@@ -1,7 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="entity.Categoria"%>
 <%@page import="entity.dao.CategoriaDAO"%>
-<%@page import="entity.Usuario"%>
+<%@page import="entity.dto.UsuarioTokenDTO"%>
+<%@page import="utils.JWTUtil"%>
 <body style="background-color: #F0F8FF">
 	<header
 		class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 border-bottom"
@@ -47,14 +48,15 @@
 					<div class="col text-end">
 
 						<%
-						if (session.getAttribute("usuarioValidado") != null) {
-							Usuario headerLogin = (Usuario) session.getAttribute("usuarioValidado");
+						String token = (String) session.getAttribute("usuarioToken");
+						UsuarioTokenDTO usuarioToken = token != null ? JWTUtil.verify(token) : null;
+						if (usuarioToken != null) {
 							String avatar = (String) session.getAttribute("avatar-base64");
 						%>
 						<img src="data:image/png;base64,<%= avatar %>"
 								style="object-fit: cover; border-radius: 50%;" height=50 alt="Avatar do usuário">
 						<a class="btn btn-secundary mx-2" style="border-radius: 0px"
-							href="./minha-conta.jsp" role="button" id="headerButtonLogin"><%=headerLogin.getNome()%></a>
+							href="./minha-conta.jsp" role="button" id="headerButtonLogin"><%=usuarioToken.getNome()%></a>
 						<a href="./carrinho.jsp" class="my-2"> <img
 							src="./img/cart.png" alt="Carrinho" height="30">
 						</a> 

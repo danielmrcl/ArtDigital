@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@page import="entity.Usuario"%>
 <%@page import="entity.dao.UsuarioDAO"%>
+<%@page import="utils.JWTUtil"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -23,10 +24,10 @@ function botaoDeletarUsuario() {
 	<div class="container p-5">
 		<%@include file='elementos/message-handler.jsp'%>
 		<%
-		Object usuarioValidado = session.getAttribute("usuarioValidado");
+		String jwtToken = (String) session.getAttribute("usuarioToken");
 	
-		if (usuarioValidado != null) {
-			Usuario usuario = (Usuario) usuarioValidado;
+		if (jwtToken != null) {
+			Usuario usuario = UsuarioDAO.procurarUsuarioPorEmail(usuarioToken.getEmail());
 			
 			String usuarioCpfCnpj = "";
 			if (usuario.getCpf() == null) {

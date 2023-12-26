@@ -16,12 +16,12 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             HttpSession session = request.getSession();
-            Object usuarioValidado = session.getAttribute("usuarioValidado");
+            var usuarioToken = (String) session.getAttribute("usuarioToken");
 
-            if (usuarioValidado == null) {
+            if (usuarioToken == null) {
                 throw new Exception("Nenhum usuario logado no sistema.");
             }
-            session.setAttribute("usuarioValidado", null);
+            session.setAttribute("usuarioToken", null);
 
             var message = "Usuario desconectado.";
             response.sendRedirect("login.jsp?success=" + message);

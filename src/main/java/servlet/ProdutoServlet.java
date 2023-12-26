@@ -11,6 +11,8 @@ import entity.Produto;
 import entity.Usuario;
 import entity.dao.CategoriaDAO;
 import entity.dao.ProdutoDAO;
+import entity.dao.UsuarioDAO;
+import utils.JWTUtil;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,11 @@ public class ProdutoServlet extends HttpServlet {
 		String descricao = request.getParameter("descInput");
 		
 		String categoriaId = request.getParameter("selectInput");
-		Categoria categoria = CategoriaDAO.procurarCategoria(Long.parseLong(categoriaId));
+
+		Categoria categoria = null;
+		if (categoriaId != null) {
+			CategoriaDAO.procurarCategoria(Long.parseLong(categoriaId));
+		}
 		
 		Integer quantidade = null;
 		Double preco = null;
@@ -47,16 +53,17 @@ public class ProdutoServlet extends HttpServlet {
 		imagemInputPart.write(file.getPath());
 		
 		Imagem imagem = new Imagem(
-        null, imagemInputPart.getSubmittedFileName(),
-        imagemInputPart.getContentType(), Files.readAllBytes(file.toPath())
+			null, imagemInputPart.getSubmittedFileName(),
+			imagemInputPart.getContentType(), Files.readAllBytes(file.toPath())
 		);
 		
 		HttpSession session = request.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("usuarioValidado");
+		String jwtToken = (String) session.getAttribute("usuarioToken");
+		Usuario usuario = UsuarioDAO.procurarUsuarioPorEmail(JWTUtil.verify(jwtToken).getEmail());
 		
 		Produto produto = new Produto(
-        null, descricao, nome, quantidade, preco, imagem, categoria, usuario
-    );
+			null, descricao, nome, quantidade, preco, imagem, categoria, usuario
+		);
 		System.out.println(produto);
 		
 		boolean success;
